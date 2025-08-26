@@ -61,7 +61,6 @@ function Login() {
                 label="Email address
 "
                 name="email"
-                icon={Mail}
               />{" "}
             </div>
             <FormInput type="password" label="Password" name="password" />
