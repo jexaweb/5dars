@@ -6,7 +6,6 @@ import FormInput from "../components/FormInput";
 import { useActionData } from "react-router-dom";
 import { Form } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { MdOutlineEmail } from "react-icons/md";
 
 export async function action({ request }) {
   const formData = await request.formData();
