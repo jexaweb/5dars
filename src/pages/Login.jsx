@@ -4,7 +4,6 @@ import FormInput from "../components/FormInput";
 import { useActionData } from "react-router-dom";
 import { Form } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Mail } from "lucide-react";
 
 export async function action({ request }) {
   const formData = await request.formData();
