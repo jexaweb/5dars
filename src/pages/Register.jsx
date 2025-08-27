@@ -29,25 +29,6 @@ function Register() {
     >
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <div class="mx-auto h-16 w-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl flex items-center justify-center mb-6">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-user-plus h-8 w-8 text-white"
-            >
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <line x1="19" x2="19" y1="8" y2="14"></line>
-              <line x1="22" x2="16" y1="11" y2="11"></line>
-            </svg>
-          </div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Create account
           </h1>
@@ -61,19 +42,18 @@ function Register() {
                         border border-gray-100 dark:border-gray-700"
         >
           <Form method="post" className="space-y-6">
-            <div>
-              <FormInput
-                taye="text"
-                label="Name"
-                name="name"
-                lefIcon={<FaRegUser />}
-              />
-            </div>
             <FormInput
-              taye="email"
+              type="text"
+              label="Name"
+              name="name"
+              leftIcon={<FaRegUser />}
+            />
+
+            <FormInput
+              type="email"
               label="Email"
               name="email"
-              lefIcon={<MdEmail />}
+              leftIcon={<MdEmail />}
             />
             <FormInput
               type="password"
@@ -95,8 +75,8 @@ function Register() {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />{" "}
               <label
-                for="remember-me"
-                class="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
               >
                 I agree to the{" "}
                 <Link className="font-medium text-purple-600 hover:text-purple-500 transition duration-200">
