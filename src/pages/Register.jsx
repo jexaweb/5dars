@@ -6,6 +6,9 @@ import FormInput from "../components/FormInput";
 import { useActionData } from "react-router-dom";
 import { Form } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { FaRegUser } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -59,15 +62,30 @@ function Register() {
         >
           <Form method="post" className="space-y-6">
             <div>
-              <FormInput taye="text" label="Name" name="name" />
+              <FormInput
+                taye="text"
+                label="Name"
+                name="name"
+                lefIcon={<FaRegUser />}
+              />
             </div>
-            <FormInput taye="email" label="Email" name="email" />
-            <FormInput taye="password" label="Password" name="password" />
             <FormInput
-              taye="password"
-              label="Confirm password
-"
+              taye="email"
+              label="Email"
+              name="email"
+              lefIcon={<MdEmail />}
+            />
+            <FormInput
+              type="password"
+              label="Password"
               name="password"
+              lefIcon={<RiLockPasswordLine />}
+            />
+            <FormInput
+              type="password"
+              label="Confirm password"
+              name="confirmPassword"
+              lefIcon={<RiLockPasswordLine />}
             />
             <div className="flex justify-center items-center">
               {" "}

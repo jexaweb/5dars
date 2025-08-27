@@ -4,6 +4,9 @@ import FormInput from "../components/FormInput";
 import { useActionData } from "react-router-dom";
 import { Form } from "react-router-dom";
 import { Link } from "react-router-dom";
+// import { MdEmail } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -61,9 +64,15 @@ function Login() {
                 label="Email address
 "
                 name="email"
+                lefIcon={<MdEmail />}
               />{" "}
             </div>
-            <FormInput type="password" label="Password" name="password" />
+            <FormInput
+              type="password"
+              label="Password"
+              name="password"
+              lefIcon={<RiLockPasswordLine />}
+            />
             <div className="flex justify-between">
               <div className="flex justify-center items-center">
                 {" "}
