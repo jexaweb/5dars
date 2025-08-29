@@ -1,9 +1,8 @@
-// import { Navigate } from "react-routes-dom";
 import { Navigate } from "react-router-dom";
 
-function ProtectedRoutes({ Children, user }) {
+function ProtectedRoutes({ children, user }) {
   if (user) {
-    return Children;
+    return children;
   } else {
     return <Navigate to="/login" />;
   }

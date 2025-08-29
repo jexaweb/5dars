@@ -1,5 +1,5 @@
 // import React, { use } from "react";
-import React from "react";
+import React, { useEffect } from "react";
 
 import FormInput from "../components/FormInput";
 
@@ -9,6 +9,11 @@ import { Link } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { useRegister } from "../hooks/useRegister";
+import { useState } from "react";
+import { formError } from "../components/Errorld";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -16,10 +21,31 @@ export async function action({ request }) {
 
   return data;
 }
-
+// function Register() {
+//   const user = useActionData();
+//   const [error, setError] = useState(null);
+//   const { register } = useRegister();
+//   useEffect(() => {
+//     if (user?.name && user?.email && user?.password) {
+//       register(user.name, user.email, user.password);
+//       setError(false);
+//     } else {
+//       setError(user ? formatProdErrorMessage(user) : false);
+//     }
+//   }, [user]);
+// }
 function Register() {
-  const data = useActionData();
-  console.log(data);
+  const user = useActionData();
+  const [error, setError] = useState(null);
+  const { register, isPending, error: _error } = useRegister();
+  useEffect(() => {
+    if (user?.name && user?.email && user?.password) {
+      register(user.name, user.email, user.password);
+      setError(false);
+    } else {
+      setError(user ? formError(user) : false);
+    }
+  }, [user]);
 
   return (
     <div
@@ -46,14 +72,14 @@ function Register() {
               type="text"
               label="Name"
               name="name"
-              leftIcon={<FaRegUser />}
+              lefIcon={<FaRegUser />}
             />
 
             <FormInput
               type="email"
               label="Email"
               name="email"
-              leftIcon={<MdEmail />}
+              lefIcon={<MdEmail />}
             />
             <FormInput
               type="password"
@@ -88,17 +114,33 @@ function Register() {
                 </Link>
               </label>
             </div>
-            <button
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl 
+            {!isPending && (
+              <button
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl 
                          shadow-sm text-sm font-medium text-white 
                          bg-gradient-to-r from-purple-600 to-blue-600 
                          hover:from-purple-700 hover:to-blue-700 
                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500
                          transform hover:scale-105 transition duration-200 ease-in-out
                          disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Register
-            </button>
+              >
+                Register
+              </button>
+            )}
+            {isPending && (
+              <button
+                disabled
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl 
+                         shadow-sm text-sm font-medium text-white 
+                         bg-gradient-to-r from-purple-600 to-blue-600 
+                         hover:from-purple-700 hover:to-blue-700 
+                         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500
+                         transform hover:scale-105 transition duration-200 ease-in-out
+                         disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Loading...
+              </button>
+            )}
             <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
               If you have an account, please{" "}
               <Link
@@ -109,6 +151,8 @@ function Register() {
               </Link>
             </p>
           </Form>
+          <div>{error && <p style={{ color: "red" }}>{error}</p>}</div>
+          <div>{_error && <p style={{ color: "red" }}>{_error}</p>}</div>
         </div>
       </div>
     </div>

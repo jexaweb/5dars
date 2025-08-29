@@ -1,12 +1,14 @@
 import React from "react";
-
 import { useActionData } from "react-router-dom";
 import { Form } from "react-router-dom";
 import { Link } from "react-router-dom";
 import FormInput from "../components/FormInput";
-
+import { useEffect } from "react";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { useLogin } from "../hooks/useLogin";
+import { useState } from "react";
+import { loginError } from "../components/LoginError";
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -15,9 +17,32 @@ export async function action({ request }) {
   return data;
 }
 
+// function Login() {
+//   const user = useActionData();
+//   const [error, setError] = useState(null);
+//   const { login } = useLogin();
+//   useEffect(() => {
+//     if (user?.name && user?.email) {
+//       login(user.name, user.email);
+//       setError(false);
+//     } else {
+//       setError(user ? formatProdErrorMessage(user) : false);
+//     }
+//   }, [user]);
+// }
+
 function Login() {
-  const data = useActionData();
-  console.log(data);
+  const user = useActionData();
+  const [error, setError] = useState(null);
+  const { login } = useLogin();
+  useEffect(() => {
+    if (user?.password && user?.email) {
+      login(user.password, user.email);
+      setError(false);
+    } else {
+      setError(user ? loginError(user) : false);
+    }
+  }, [user]);
 
   return (
     <div
@@ -90,6 +115,7 @@ function Login() {
               </Link>
             </p>
           </Form>
+          <div>{error && <p style={{ color: "red" }}>{error}</p>}</div>
         </div>
       </div>
     </div>
